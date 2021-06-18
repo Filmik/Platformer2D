@@ -15,7 +15,10 @@ public class Player2DController : MonoBehaviour
     Rigidbody2D _rigidbody2D;
 
 
-    int movement = 0;
+    //int movement = 0;
+    float runMovement;
+    float jumpMovement;
+
 
     void Awake()
     {
@@ -24,9 +27,9 @@ public class Player2DController : MonoBehaviour
 
     void Update()
     {
-        //transform.position += new Vector3(movement, 0,0) * Time.deltaTime * movementSpeed;
-
-        
+        transform.position += new Vector3(runMovement, 0,0) * Time.deltaTime * movementSpeed;
+       // if(runMovement==0)
+            //disable anim
         //if (Mathf.Abs(_rigidbody2D.velocity.y) < 0.001f)//jump
            // _rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 
@@ -35,11 +38,12 @@ public class Player2DController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext value)
     {
         Vector2 inputMovement = value.ReadValue<Vector2>();
-        //rawInputMovement = new Vector2(inputMovement.x, 0);
-        Debug.Log("marcin: "+ inputMovement);
+        runMovement = inputMovement.x;
 
         if (!Mathf.Approximately(0, inputMovement.x))//change rotation
-            transform.rotation = movement > 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+            transform.rotation = inputMovement.x < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+
+        //run animation
     }
 
     public void OnAttack(InputAction.CallbackContext value)
@@ -48,5 +52,13 @@ public class Player2DController : MonoBehaviour
             Debug.Log("attack");
            // playerAnimationBehaviour.PlayAttackAnim();
         
+    } 
+    public void OnJump(InputAction.CallbackContext value)
+    {
+        if (value.started)
+            Debug.Log("jump");
+        // playerAnimationBehaviour.PlayAttackAnim();
+        if (Mathf.Abs(_rigidbody2D.velocity.y) < 0.001f)
+            _rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
 }
