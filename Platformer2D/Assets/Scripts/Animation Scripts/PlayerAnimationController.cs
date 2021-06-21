@@ -8,9 +8,11 @@ public class PlayerAnimationController : MonoBehaviour
     bool runingState;
     bool attackState;
     bool deadState;
+    bool getHitState;
     int runingHash;
     int attackHash;
     int deadHash;
+    int getHitHash;
 
     void Awake()
     {
@@ -18,12 +20,14 @@ public class PlayerAnimationController : MonoBehaviour
         runingHash = Animator.StringToHash("Runing");
         attackHash = Animator.StringToHash("Attack");
         deadHash = Animator.StringToHash("Dead");
-        runingState = animator.GetBool(runingHash);
-        attackState = animator.GetBool(attackHash);
-        deadState = animator.GetBool(deadHash);
+        getHitHash = Animator.StringToHash("GetHit");
+        //runingState = animator.GetBool(runingHash);
+        //attackState = animator.GetBool(attackHash);
+        //deadState = animator.GetBool(deadHash);
 
     }
 
-
     public void playerDie()=>animator.SetBool(deadHash, true);
+    public void playerGetHit()=>animator.SetTrigger(getHitHash);
+    public void playerAttack()=>animator.SetTrigger(attackHash);
 }

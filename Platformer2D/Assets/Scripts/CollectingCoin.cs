@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectingCoin : MonoBehaviour
+public class CollectingCoin : DestroyAfterAnimation
 {
     CoinAnimationController animController;
     Animator animator;
+    CollectedCoins collectedCoins;
     private void Awake()
     {
+        GameObject gameManager = GameObject.Find("GameManager");
+        if (gameManager == null)
+            Debug.LogError("GameManager not found");
+        else collectedCoins = gameManager.GetComponent<CollectedCoins>();
         animController = GetComponent<CoinAnimationController>();
         animator = GetComponent<Animator>();
     }
@@ -16,12 +21,8 @@ public class CollectingCoin : MonoBehaviour
         if (collision.gameObject.layer == 8)//layer 8 -> Player
         {
             animController.CoinIsCollected();
-            StartCoroutine(WhaitForCollectAnimation());
+            collectedCoins.AddCoin();
+            DestroyAfterAnim(gameObject,animator);
         }
-    }
-    IEnumerator WhaitForCollectAnimation( )
-    {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
     }
 }
