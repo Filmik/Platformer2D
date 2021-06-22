@@ -10,7 +10,7 @@ public class Lerp : MonoBehaviour
         float percentageComplete = timeSinceStarted / lerpTime;
 
         var result = Vector3.Lerp(start, end, percentageComplete);
-
+        
         return result;
     }
 }

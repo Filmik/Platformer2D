@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     float hitDistance = 1;
     [SerializeField]
+    int damage = 1;
+    [SerializeField]
     LayerMask ignoreLayer;
 
     void Awake()
@@ -22,9 +24,11 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerTransform.right, hitDistance, ~ignoreLayer);
         if (hit){
             //Debug.Log("hit : " + hit.collider.name);
-            if(hit.collider.gameObject.layer==9)//Enemie layer
+            if (hit.collider.gameObject.layer == 9)//Enemie layer
+            {
                 Debug.Log("hit : " + hit.collider.name);
-
+                hit.collider.GetComponent<EnemyCreatureLifeManager>().EnemyGetHit(damage);
+            }
         }
     }
 }
