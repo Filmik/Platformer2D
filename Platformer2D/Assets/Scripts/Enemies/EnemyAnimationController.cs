@@ -40,9 +40,4 @@ public class EnemyAnimationController : MonoBehaviour
     public void Run(bool runing) => animator.SetBool(runingHash, runing);
     public void Attack() => animator.SetTrigger(AttackHash);
 
-    IEnumerator ResetTriggerAfterTime(int animation, float time)
-    {
-        yield return new WaitForSeconds(time);
-        animator.ResetTrigger(animation);
-    }
 }

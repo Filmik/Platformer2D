@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Awake()=> playerTransform = GetComponent<Transform>();
     
-    public void Attack()//Run by Attack animation
+    public void Attack()//activated by Attack animation
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerTransform.right, hitDistance, ~ignoreLayer);
         if (hit) {

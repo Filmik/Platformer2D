@@ -9,8 +9,6 @@ public class Player2DController : MonoBehaviour
     float movementSpeed = 1;
     [SerializeField]
     float jumpForce = 5;
-    [SerializeField]
-    PlayerInput playerInput;
 
     PlayerAnimationController animationController;
     Rigidbody2D _rigidbody2D;
@@ -26,7 +24,7 @@ public class Player2DController : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(runMovement, 0,0) * Time.deltaTime * movementSpeed;
+        transform.position += new Vector3(runMovement, 0,0) * Time.deltaTime * movementSpeed;//player movement
     }
 
     public void OnMovement(InputAction.CallbackContext value)
