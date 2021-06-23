@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729aec15594e97442b8f315435b39783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
-  jumpForce: 5
+  movementSpeed: 3
+  jumpForce: 8
   playerInput: {fileID: 7275934407430337487}
 --- !u!114 &7275934407430337487
 MonoBehaviour:
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitDistance: 1
+  damage: 1
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 256
